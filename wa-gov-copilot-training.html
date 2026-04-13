@@ -1,0 +1,1364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microsoft Copilot Training | WA Government</title>
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ms-blue: #0078D4;
+            --ms-dark-blue: #003B73;
+            --ms-light-blue: #DEECF9;
+            --ms-purple: #5B2D8E;
+            --ms-green: #107C10;
+            --wa-gold: #C8A951;
+            --wa-dark: #1A1A2E;
+            --text-primary: #1A1A2E;
+            --text-secondary: #505050;
+            --bg-light: #F5F7FA;
+            --card-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            --card-hover: 0 8px 30px rgba(0,120,212,0.15);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            color: var(--text-primary);
+            line-height: 1.6;
+            background: #fff;
+        }
+
+        /* ===== NAVIGATION ===== */
+        nav {
+            background: var(--wa-dark);
+            padding: 0 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .nav-brand svg { width: 32px; height: 32px; }
+
+        .nav-brand span {
+            color: #fff;
+            font-weight: 600;
+            font-size: 1.1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: rgba(255,255,255,0.85);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 400;
+            padding: 0.4rem 0;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #fff;
+            border-bottom-color: var(--wa-gold);
+        }
+
+        .nav-cta {
+            background: var(--ms-blue);
+            color: #fff !important;
+            padding: 0.5rem 1.2rem !important;
+            border-radius: 4px;
+            border: none !important;
+            font-weight: 600 !important;
+        }
+
+        .nav-cta:hover { background: #106EBE; }
+
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: #fff;
+            margin: 5px 0;
+            transition: 0.3s;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            background: linear-gradient(135deg, var(--wa-dark) 0%, var(--ms-dark-blue) 50%, var(--ms-blue) 100%);
+            padding: 6rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(200,169,81,0.12) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(0,120,212,0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(200,169,81,0.2);
+            border: 1px solid var(--wa-gold);
+            color: var(--wa-gold);
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 {
+            color: #fff;
+            font-size: 3rem;
+            font-weight: 700;
+            line-height: 1.15;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .hero h1 .highlight {
+            background: linear-gradient(90deg, var(--wa-gold), #E8D491);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            color: rgba(255,255,255,0.8);
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            line-height: 1.7;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.75rem 2rem;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--ms-blue);
+            color: #fff;
+        }
+
+        .btn-primary:hover { background: #106EBE; transform: translateY(-1px); }
+
+        .btn-outline {
+            background: transparent;
+            color: #fff;
+            border: 2px solid rgba(255,255,255,0.4);
+        }
+
+        .btn-outline:hover {
+            border-color: #fff;
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* ===== SECTIONS ===== */
+        section { padding: 5rem 2rem; }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.02em;
+        }
+
+        .section-header p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* ===== STATS BAR ===== */
+        .stats-bar {
+            background: var(--bg-light);
+            padding: 2.5rem 2rem;
+            border-bottom: 1px solid #E8ECF1;
+        }
+
+        .stats-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--ms-blue);
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-item p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* ===== RESOURCE CARDS ===== */
+        #resources { background: #fff; }
+
+        .resource-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 0.5rem 1.5rem;
+            border: 2px solid #E0E0E0;
+            background: #fff;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: var(--text-secondary);
+        }
+
+        .tab-btn.active, .tab-btn:hover {
+            border-color: var(--ms-blue);
+            color: var(--ms-blue);
+            background: var(--ms-light-blue);
+        }
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .resource-card {
+            background: #fff;
+            border: 1px solid #E8ECF1;
+            border-radius: 12px;
+            padding: 1.75rem;
+            transition: all 0.25s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .resource-card:hover {
+            box-shadow: var(--card-hover);
+            transform: translateY(-2px);
+            border-color: var(--ms-blue);
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .card-icon.blue { background: var(--ms-light-blue); color: var(--ms-blue); }
+        .card-icon.purple { background: #EDE0F7; color: var(--ms-purple); }
+        .card-icon.green { background: #E6F4E6; color: var(--ms-green); }
+        .card-icon.gold { background: #FDF3DC; color: #9A7B2D; }
+
+        .card-tag {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            margin-bottom: 0.75rem;
+        }
+
+        .tag-beginner { background: #E6F4E6; color: var(--ms-green); }
+        .tag-intermediate { background: var(--ms-light-blue); color: var(--ms-blue); }
+        .tag-advanced { background: #EDE0F7; color: var(--ms-purple); }
+        .tag-new { background: #FDF3DC; color: #9A7B2D; }
+
+        .resource-card h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .resource-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            flex-grow: 1;
+            margin-bottom: 1rem;
+        }
+
+        .card-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 1rem;
+            border-top: 1px solid #F0F0F0;
+        }
+
+        .card-meta span {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .card-link {
+            color: var(--ms-blue);
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .card-link:hover { text-decoration: underline; }
+
+        /* ===== LEARNING PATHS ===== */
+        #paths { background: var(--bg-light); }
+
+        .paths-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .path-card {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: all 0.25s;
+        }
+
+        .path-card:hover {
+            box-shadow: var(--card-hover);
+            transform: translateY(-2px);
+        }
+
+        .path-header {
+            padding: 1.5rem;
+            color: #fff;
+        }
+
+        .path-header.blue { background: linear-gradient(135deg, var(--ms-blue), #2B88D8); }
+        .path-header.purple { background: linear-gradient(135deg, var(--ms-purple), #7B4DB3); }
+        .path-header.green { background: linear-gradient(135deg, var(--ms-green), #2D9B2D); }
+        .path-header.gold { background: linear-gradient(135deg, #9A7B2D, var(--wa-gold)); }
+
+        .path-header h3 { font-size: 1.15rem; margin-bottom: 0.3rem; }
+        .path-header p { font-size: 0.85rem; opacity: 0.85; }
+
+        .path-body { padding: 1.5rem; }
+
+        .path-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 1rem;
+        }
+
+        .step-num {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--ms-light-blue);
+            color: var(--ms-blue);
+            font-size: 0.75rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .step-text {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* ===== SCHEDULE ===== */
+        #schedule { background: #fff; }
+
+        .schedule-filters {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1.2rem;
+            border: 1px solid #E0E0E0;
+            background: #fff;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: var(--text-secondary);
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            border-color: var(--ms-blue);
+            color: var(--ms-blue);
+            background: var(--ms-light-blue);
+        }
+
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+        }
+
+        .schedule-table thead {
+            background: var(--wa-dark);
+            color: #fff;
+        }
+
+        .schedule-table th {
+            padding: 1rem 1.25rem;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .schedule-table td {
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid #F0F0F0;
+            font-size: 0.9rem;
+        }
+
+        .schedule-table tr:hover { background: #FAFBFD; }
+
+        .schedule-table tr:last-child td { border-bottom: none; }
+
+        .session-type {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .type-workshop { background: #EDE0F7; color: var(--ms-purple); }
+        .type-webinar { background: var(--ms-light-blue); color: var(--ms-blue); }
+        .type-lab { background: #E6F4E6; color: var(--ms-green); }
+        .type-office-hours { background: #FDF3DC; color: #9A7B2D; }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .status-open { background: #E6F4E6; color: var(--ms-green); }
+        .status-filling { background: #FDF3DC; color: #9A7B2D; }
+        .status-waitlist { background: #FDE7E9; color: #D13438; }
+
+        .register-link {
+            color: var(--ms-blue);
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 0.85rem;
+        }
+
+        .register-link:hover { text-decoration: underline; }
+
+        /* ===== FAQ ===== */
+        #faq { background: var(--bg-light); }
+
+        .faq-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: #fff;
+            border-radius: 8px;
+            margin-bottom: 0.75rem;
+            box-shadow: var(--card-shadow);
+            overflow: hidden;
+        }
+
+        .faq-question {
+            width: 100%;
+            background: none;
+            border: none;
+            padding: 1.25rem 1.5rem;
+            text-align: left;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: inherit;
+        }
+
+        .faq-question:hover { color: var(--ms-blue); }
+
+        .faq-question .chevron {
+            transition: transform 0.3s;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .faq-item.open .chevron { transform: rotate(180deg); }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .faq-answer-inner {
+            padding: 0 1.5rem 1.25rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.7;
+        }
+
+        /* ===== CONTACT / CTA ===== */
+        .cta-section {
+            background: linear-gradient(135deg, var(--wa-dark) 0%, var(--ms-dark-blue) 100%);
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            color: #fff;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            color: rgba(255,255,255,0.75);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .cta-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .cta-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .cta-card h3 {
+            color: #fff;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .cta-card p {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-card a {
+            color: var(--wa-gold);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .cta-card a:hover { text-decoration: underline; }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--wa-dark);
+            padding: 2rem;
+            text-align: center;
+            border-top: 3px solid var(--wa-gold);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        footer p {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.8rem;
+        }
+
+        footer a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+        }
+
+        footer a:hover { color: #fff; }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hamburger { display: block; }
+
+            .nav-links.open {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 64px;
+                left: 0;
+                right: 0;
+                background: var(--wa-dark);
+                padding: 1rem 2rem;
+                gap: 0.75rem;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            }
+
+            .hero { padding: 4rem 1.5rem; }
+            .hero h1 { font-size: 2rem; }
+            .hero p { font-size: 1rem; }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+
+            .resources-grid { grid-template-columns: 1fr; }
+            .paths-grid { grid-template-columns: 1fr; }
+
+            .schedule-table { font-size: 0.8rem; }
+            .schedule-table th, .schedule-table td { padding: 0.75rem; }
+
+            .cta-cards { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+    <div class="nav-inner">
+        <a href="#" class="nav-brand">
+            <svg viewBox="0 0 32 32" fill="none">
+                <rect x="1" y="1" width="14" height="14" rx="1" fill="#F25022"/>
+                <rect x="17" y="1" width="14" height="14" rx="1" fill="#7FBA00"/>
+                <rect x="1" y="17" width="14" height="14" rx="1" fill="#00A4EF"/>
+                <rect x="17" y="17" width="14" height="14" rx="1" fill="#FFB900"/>
+            </svg>
+            <span>Copilot Training Hub</span>
+        </a>
+        <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#resources">Resources</a></li>
+            <li><a href="#paths">Learning Paths</a></li>
+            <li><a href="#schedule">Schedule</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#contact" class="nav-cta">Get in Touch</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-content">
+        <div class="hero-badge">WA Government &bull; Microsoft Partnership</div>
+        <h1>Unlock Productivity with<br><span class="highlight">Microsoft Copilot</span></h1>
+        <p>Your central hub for Copilot training, resources, and hands-on workshops tailored for Western Australian Government agencies.</p>
+        <div class="hero-actions">
+            <a href="#schedule" class="btn btn-primary">
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M4 0h8a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V2a2 2 0 012-2zm0 1.5a.5.5 0 00-.5.5v12a.5.5 0 00.5.5h8a.5.5 0 00.5-.5V2a.5.5 0 00-.5-.5H4zM5 4h6v1H5V4zm0 3h6v1H5V7zm0 3h4v1H5v-1z"/></svg>
+                View Upcoming Sessions
+            </a>
+            <a href="#resources" class="btn btn-outline">Browse Resources</a>
+        </div>
+    </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+    <div class="stats-grid">
+        <div class="stat-item">
+            <h3>15+</h3>
+            <p>Training modules available</p>
+        </div>
+        <div class="stat-item">
+            <h3>500+</h3>
+            <p>WA Gov staff trained</p>
+        </div>
+        <div class="stat-item">
+            <h3>12</h3>
+            <p>Upcoming sessions</p>
+        </div>
+        <div class="stat-item">
+            <h3>4</h3>
+            <p>Learning paths</p>
+        </div>
+    </div>
+</div>
+
+<!-- RESOURCES -->
+<section id="resources">
+    <div class="container">
+        <div class="section-header">
+            <h2>Training Resources</h2>
+            <p>Self-paced guides, videos, and reference materials to help you master Copilot across Microsoft 365.</p>
+        </div>
+
+        <div class="resource-tabs">
+            <button class="tab-btn active" onclick="filterResources('all')">All Resources</button>
+            <button class="tab-btn" onclick="filterResources('getting-started')">Getting Started</button>
+            <button class="tab-btn" onclick="filterResources('apps')">M365 Apps</button>
+            <button class="tab-btn" onclick="filterResources('security')">Security &amp; Governance</button>
+            <button class="tab-btn" onclick="filterResources('advanced')">Advanced</button>
+        </div>
+
+        <div class="resources-grid" id="resourcesGrid">
+
+            <!-- Card 1 -->
+            <div class="resource-card" data-category="getting-started">
+                <div class="card-icon blue">
+                    <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                </div>
+                <span class="card-tag tag-beginner">Beginner</span>
+                <h3>Introduction to Microsoft Copilot</h3>
+                <p>Understand what Copilot is, how it works across Microsoft 365, and the fundamentals of effective prompting.</p>
+                <div class="card-meta">
+                    <span>30 min &bull; Self-paced</span>
+                    <a href="https://learn.microsoft.com/en-us/copilot/microsoft-365/microsoft-365-copilot-overview" class="card-link" target="_blank">Start Learning &rarr;</a>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="resource-card" data-category="getting-started">
+                <div class="card-icon green">
+                    <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                </div>
+                <span class="card-tag tag-beginner">Beginner</span>
+                <h3>Responsible AI &amp; Copilot for Government</h3>
+                <p>Learn about data privacy, responsible AI principles, and how Copilot handles government data securely within your tenant.</p>
+                <div class="card-meta">
+                    <span>20 min &bull; Self-paced</span>
+                    <a href="https://learn.microsoft.com/en-us/copilot/microsoft-365/microsoft-365-copilot-privacy" class="card-link" target="_blank">Start Learning &rarr;</a>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="resource-card" data-category="getting-started">
+                <div class="card-icon gold">
+                    <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+                </div>
+                <span class="card-tag tag-new">New</span>
+                <h3>The Art of Prompting</h3>
+                <p>Master the skill of writing effective prompts. Learn the Goal-Context-Source-Expectations framework for consistent results.</p>
+                <div class="card-meta">
+                    <span>25 min &bull; Self-paced</span>
+                    <a href="https://adoption.microsoft.com/en-us/copilot/prompt-gallery/" class="card-link" target="_blank">Start Learning &rarr;</a>
+                </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="resource-card" data-category="apps">
+                <div class="card-icon blue">
+                    <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                </div>
+                <span class="card-tag tag-intermediate">Intermediate</span>
+                <h3>Copilot in Outlook &amp; Teams</h3>
+                <p>Summarise long email threads, draft replies, catch up on missed meetings, and prepare for upcoming calls — all with Copilot.</p>
+                <div class="card-meta">
+                    <span>40 min &bull; Self-paced</span>
+                    <a href="https://support.microsoft.com/en-us/copilot-outlook" class="card-link" target="_blank">Start Learning &rarr;</a>
+                </div>
+            </div>
+
+            <!-- Card 5 -->
+            <div class="resource-card" data-category="apps">
+                <div class="card-icon purple">
+                    <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                </div>
+                <span class="card-tag tag-intermediate">Intermediate</span>
+                <h3>Copilot in Word, Excel &amp; PowerPoint</h3>
+                <p>Generate documents from prompts, analyse spreadsheet data with natural language, and create presentations in minutes.</p>
+                <div class="card-meta">
+                    <span>45 min &bull; Self-paced</span>
+                    <a href="https://support.microsoft.com/en-us/copilot-word" class="card-link" target="_blank">Start Learning &rarr;</a>
+                </div>
+            </div>
+
+            <!-- Card 6 -->
+            <div class="resource-card" data-category="apps">
+                <div class="card-icon green">
+                    <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+                </div>
+                <span class="card-tag tag-new">New</span>
+                <h3>Copilot in SharePoint &amp; OneDrive</h3>
+                <p>Ask questions across your files, generate summaries of SharePoint sites, and surface knowledge from your document libraries.</p>
+                <div class="card-meta">
+                    <span>30 min &bull; Self-paced</span>
+                    <a href="https://support.microsoft.com/en-us/copilot-sharepoint" class="card-link" target="_blank">Start Learning &rarr;</a>
+                </div>
+            </div>
+
+            <!-- Card 7 -->
+            <div class="resource-card" data-category="security">
+                <div class="card-icon gold">
+                    <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                </div>
+                <span class="card-tag tag-intermediate">Intermediate</span>
+                <h3>Data Security &amp; Access Controls</h3>
+                <p>Understand how Copilot respects existing permissions, sensitivity labels, and data loss prevention policies in your agency.</p>
+                <div class="card-meta">
+                    <span>35 min &bull; Self-paced</span>
+                    <a href="https://learn.microsoft.com/en-us/copilot/microsoft-365/microsoft-365-copilot-security" class="card-link" target="_blank">Start Learning &rarr;</a>
+                </div>
+            </div>
+
+            <!-- Card 8 -->
+            <div class="resource-card" data-category="security">
+                <div class="card-icon purple">
+                    <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                </div>
+                <span class="card-tag tag-advanced">Advanced</span>
+                <h3>Admin Guide: Copilot Deployment</h3>
+                <p>IT admin guide covering licence assignment, readiness assessments, sensitivity labels, and tenant-level configuration.</p>
+                <div class="card-meta">
+                    <span>60 min &bull; Self-paced</span>
+                    <a href="https://learn.microsoft.com/en-us/copilot/microsoft-365/microsoft-365-copilot-setup" class="card-link" target="_blank">Start Learning &rarr;</a>
+                </div>
+            </div>
+
+            <!-- Card 9 -->
+            <div class="resource-card" data-category="advanced">
+                <div class="card-icon blue">
+                    <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                </div>
+                <span class="card-tag tag-advanced">Advanced</span>
+                <h3>Copilot Studio &amp; Custom Agents</h3>
+                <p>Build custom Copilot agents tailored to your agency's workflows using Copilot Studio — no code required.</p>
+                <div class="card-meta">
+                    <span>50 min &bull; Self-paced</span>
+                    <a href="https://learn.microsoft.com/en-us/microsoft-copilot-studio/" class="card-link" target="_blank">Start Learning &rarr;</a>
+                </div>
+            </div>
+
+            <!-- Card 10 -->
+            <div class="resource-card" data-category="advanced">
+                <div class="card-icon green">
+                    <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"/></svg>
+                </div>
+                <span class="card-tag tag-new">New</span>
+                <h3>Microsoft Copilot Pages</h3>
+                <p>Collaborate with Copilot in a persistent, shareable canvas. Turn AI-generated content into living documents your team can edit together.</p>
+                <div class="card-meta">
+                    <span>20 min &bull; Self-paced</span>
+                    <a href="https://support.microsoft.com/en-us/topic/copilot-pages" class="card-link" target="_blank">Start Learning &rarr;</a>
+                </div>
+            </div>
+
+            <!-- Card 11 -->
+            <div class="resource-card" data-category="getting-started">
+                <div class="card-icon purple">
+                    <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                </div>
+                <span class="card-tag tag-beginner">Beginner</span>
+                <h3>On-Demand Video Library</h3>
+                <p>Watch recorded sessions covering Copilot basics, app-specific deep dives, and government use cases at your own pace.</p>
+                <div class="card-meta">
+                    <span>Various &bull; On-demand</span>
+                    <a href="https://adoption.microsoft.com/en-us/copilot/" class="card-link" target="_blank">Watch Now &rarr;</a>
+                </div>
+            </div>
+
+            <!-- Card 12 -->
+            <div class="resource-card" data-category="apps">
+                <div class="card-icon gold">
+                    <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/></svg>
+                </div>
+                <span class="card-tag tag-new">New</span>
+                <h3>Copilot Prompt Gallery</h3>
+                <p>Browse hundreds of ready-to-use prompts for every M365 app. Copy, customise, and start being productive immediately.</p>
+                <div class="card-meta">
+                    <span>Reference &bull; Always available</span>
+                    <a href="https://adoption.microsoft.com/en-us/copilot/prompt-gallery/" class="card-link" target="_blank">Browse Prompts &rarr;</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- LEARNING PATHS -->
+<section id="paths">
+    <div class="container">
+        <div class="section-header">
+            <h2>Recommended Learning Paths</h2>
+            <p>Structured journeys based on your role and experience level.</p>
+        </div>
+
+        <div class="paths-grid">
+            <div class="path-card">
+                <div class="path-header blue">
+                    <h3>New to Copilot</h3>
+                    <p>For first-time users</p>
+                </div>
+                <div class="path-body">
+                    <div class="path-step"><span class="step-num">1</span><span class="step-text">Introduction to Microsoft Copilot</span></div>
+                    <div class="path-step"><span class="step-num">2</span><span class="step-text">Responsible AI &amp; Copilot for Government</span></div>
+                    <div class="path-step"><span class="step-num">3</span><span class="step-text">The Art of Prompting</span></div>
+                    <div class="path-step"><span class="step-num">4</span><span class="step-text">Attend an Introduction Workshop</span></div>
+                </div>
+            </div>
+
+            <div class="path-card">
+                <div class="path-header purple">
+                    <h3>Everyday Productivity</h3>
+                    <p>For knowledge workers</p>
+                </div>
+                <div class="path-body">
+                    <div class="path-step"><span class="step-num">1</span><span class="step-text">Copilot in Outlook &amp; Teams</span></div>
+                    <div class="path-step"><span class="step-num">2</span><span class="step-text">Copilot in Word, Excel &amp; PowerPoint</span></div>
+                    <div class="path-step"><span class="step-num">3</span><span class="step-text">Copilot Pages &amp; Prompt Gallery</span></div>
+                    <div class="path-step"><span class="step-num">4</span><span class="step-text">Attend a Hands-on Lab</span></div>
+                </div>
+            </div>
+
+            <div class="path-card">
+                <div class="path-header green">
+                    <h3>IT Administrators</h3>
+                    <p>For deployment &amp; governance</p>
+                </div>
+                <div class="path-body">
+                    <div class="path-step"><span class="step-num">1</span><span class="step-text">Admin Guide: Copilot Deployment</span></div>
+                    <div class="path-step"><span class="step-num">2</span><span class="step-text">Data Security &amp; Access Controls</span></div>
+                    <div class="path-step"><span class="step-num">3</span><span class="step-text">Sensitivity Labels &amp; DLP Policies</span></div>
+                    <div class="path-step"><span class="step-num">4</span><span class="step-text">Attend the Security Deep Dive</span></div>
+                </div>
+            </div>
+
+            <div class="path-card">
+                <div class="path-header gold">
+                    <h3>Champions &amp; Power Users</h3>
+                    <p>For change agents</p>
+                </div>
+                <div class="path-body">
+                    <div class="path-step"><span class="step-num">1</span><span class="step-text">Complete Everyday Productivity path</span></div>
+                    <div class="path-step"><span class="step-num">2</span><span class="step-text">Copilot Studio &amp; Custom Agents</span></div>
+                    <div class="path-step"><span class="step-num">3</span><span class="step-text">SharePoint &amp; OneDrive with Copilot</span></div>
+                    <div class="path-step"><span class="step-num">4</span><span class="step-text">Become a Copilot Champion</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SCHEDULE -->
+<section id="schedule">
+    <div class="container">
+        <div class="section-header">
+            <h2>Upcoming Training Sessions</h2>
+            <p>Live workshops, webinars, and hands-on labs — register to secure your spot.</p>
+        </div>
+
+        <div class="schedule-filters">
+            <button class="filter-btn active" onclick="filterSchedule('all')">All Sessions</button>
+            <button class="filter-btn" onclick="filterSchedule('workshop')">Workshops</button>
+            <button class="filter-btn" onclick="filterSchedule('webinar')">Webinars</button>
+            <button class="filter-btn" onclick="filterSchedule('lab')">Hands-on Labs</button>
+            <button class="filter-btn" onclick="filterSchedule('office-hours')">Office Hours</button>
+        </div>
+
+        <table class="schedule-table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Time (AWST)</th>
+                    <th>Session</th>
+                    <th>Type</th>
+                    <th>Level</th>
+                    <th>Status</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="scheduleBody">
+                <tr data-type="webinar">
+                    <td>Tue 21 Apr</td>
+                    <td>10:00 – 11:00</td>
+                    <td><strong>Getting Started with Copilot</strong><br><small>Introduction for new users</small></td>
+                    <td><span class="session-type type-webinar">Webinar</span></td>
+                    <td>Beginner</td>
+                    <td><span class="status-badge status-open">Open</span></td>
+                    <td><a href="#" class="register-link">Register &rarr;</a></td>
+                </tr>
+                <tr data-type="workshop">
+                    <td>Thu 24 Apr</td>
+                    <td>09:00 – 12:00</td>
+                    <td><strong>Copilot in Outlook &amp; Teams</strong><br><small>Hands-on with email &amp; meetings</small></td>
+                    <td><span class="session-type type-workshop">Workshop</span></td>
+                    <td>Intermediate</td>
+                    <td><span class="status-badge status-open">Open</span></td>
+                    <td><a href="#" class="register-link">Register &rarr;</a></td>
+                </tr>
+                <tr data-type="lab">
+                    <td>Mon 28 Apr</td>
+                    <td>13:00 – 15:00</td>
+                    <td><strong>Prompting Masterclass</strong><br><small>Write prompts that deliver results</small></td>
+                    <td><span class="session-type type-lab">Lab</span></td>
+                    <td>All levels</td>
+                    <td><span class="status-badge status-filling">Filling Fast</span></td>
+                    <td><a href="#" class="register-link">Register &rarr;</a></td>
+                </tr>
+                <tr data-type="webinar">
+                    <td>Wed 30 Apr</td>
+                    <td>10:00 – 11:00</td>
+                    <td><strong>Copilot for Executives</strong><br><small>Strategic use cases &amp; ROI</small></td>
+                    <td><span class="session-type type-webinar">Webinar</span></td>
+                    <td>Beginner</td>
+                    <td><span class="status-badge status-open">Open</span></td>
+                    <td><a href="#" class="register-link">Register &rarr;</a></td>
+                </tr>
+                <tr data-type="workshop">
+                    <td>Tue 6 May</td>
+                    <td>09:00 – 12:00</td>
+                    <td><strong>Word, Excel &amp; PowerPoint Deep Dive</strong><br><small>Create documents, analyse data, build decks</small></td>
+                    <td><span class="session-type type-workshop">Workshop</span></td>
+                    <td>Intermediate</td>
+                    <td><span class="status-badge status-open">Open</span></td>
+                    <td><a href="#" class="register-link">Register &rarr;</a></td>
+                </tr>
+                <tr data-type="office-hours">
+                    <td>Thu 8 May</td>
+                    <td>14:00 – 15:00</td>
+                    <td><strong>Copilot Open Office Hours</strong><br><small>Bring your questions &amp; scenarios</small></td>
+                    <td><span class="session-type type-office-hours">Office Hours</span></td>
+                    <td>All levels</td>
+                    <td><span class="status-badge status-open">Open</span></td>
+                    <td><a href="#" class="register-link">Register &rarr;</a></td>
+                </tr>
+                <tr data-type="workshop">
+                    <td>Mon 12 May</td>
+                    <td>09:00 – 12:00</td>
+                    <td><strong>Data Security &amp; Governance</strong><br><small>For IT admins &amp; security teams</small></td>
+                    <td><span class="session-type type-workshop">Workshop</span></td>
+                    <td>Advanced</td>
+                    <td><span class="status-badge status-open">Open</span></td>
+                    <td><a href="#" class="register-link">Register &rarr;</a></td>
+                </tr>
+                <tr data-type="lab">
+                    <td>Wed 14 May</td>
+                    <td>13:00 – 16:00</td>
+                    <td><strong>Copilot Studio: Build Your First Agent</strong><br><small>Create a custom Copilot agent</small></td>
+                    <td><span class="session-type type-lab">Lab</span></td>
+                    <td>Advanced</td>
+                    <td><span class="status-badge status-filling">Filling Fast</span></td>
+                    <td><a href="#" class="register-link">Register &rarr;</a></td>
+                </tr>
+                <tr data-type="webinar">
+                    <td>Tue 20 May</td>
+                    <td>10:00 – 11:00</td>
+                    <td><strong>Copilot Success Stories: WA Gov</strong><br><small>Real agencies, real results</small></td>
+                    <td><span class="session-type type-webinar">Webinar</span></td>
+                    <td>All levels</td>
+                    <td><span class="status-badge status-open">Open</span></td>
+                    <td><a href="#" class="register-link">Register &rarr;</a></td>
+                </tr>
+                <tr data-type="workshop">
+                    <td>Thu 22 May</td>
+                    <td>09:00 – 12:00</td>
+                    <td><strong>SharePoint &amp; Copilot Knowledge Bases</strong><br><small>Surface knowledge from your documents</small></td>
+                    <td><span class="session-type type-workshop">Workshop</span></td>
+                    <td>Intermediate</td>
+                    <td><span class="status-badge status-open">Open</span></td>
+                    <td><a href="#" class="register-link">Register &rarr;</a></td>
+                </tr>
+                <tr data-type="office-hours">
+                    <td>Mon 26 May</td>
+                    <td>14:00 – 15:00</td>
+                    <td><strong>Copilot Champions Q&amp;A</strong><br><small>For change leads &amp; champions</small></td>
+                    <td><span class="session-type type-office-hours">Office Hours</span></td>
+                    <td>All levels</td>
+                    <td><span class="status-badge status-open">Open</span></td>
+                    <td><a href="#" class="register-link">Register &rarr;</a></td>
+                </tr>
+                <tr data-type="lab">
+                    <td>Wed 28 May</td>
+                    <td>10:00 – 12:00</td>
+                    <td><strong>Advanced Prompting &amp; Copilot Pages</strong><br><small>Collaborative AI content creation</small></td>
+                    <td><span class="session-type type-lab">Lab</span></td>
+                    <td>Advanced</td>
+                    <td><span class="status-badge status-open">Open</span></td>
+                    <td><a href="#" class="register-link">Register &rarr;</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+    <div class="container">
+        <div class="section-header">
+            <h2>Frequently Asked Questions</h2>
+            <p>Common questions about Copilot training and adoption for WA Government.</p>
+        </div>
+
+        <div class="faq-list">
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    Who is eligible for these training sessions?
+                    <span class="chevron">&#9660;</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">All Western Australian Government employees with a Microsoft 365 licence are welcome to attend. Some advanced sessions (e.g., Copilot Studio) may require a Copilot licence — check the session description for details.</div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    Is my data safe when using Copilot?
+                    <span class="chevron">&#9660;</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">Yes. Microsoft Copilot operates within your organisation's Microsoft 365 tenant and respects all existing access controls, sensitivity labels, and data loss prevention policies. Your data is not used to train foundation models. For details, see the <em>Data Security &amp; Access Controls</em> resource above.</div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    Do I need a Copilot licence to attend?
+                    <span class="chevron">&#9660;</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">Introductory webinars are open to everyone. For hands-on workshops and labs, a Microsoft 365 Copilot licence is recommended so you can follow along. If your agency hasn't rolled out licences yet, contact your IT admin or reach out to us for trial access.</div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    Can I request a custom session for my agency?
+                    <span class="chevron">&#9660;</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">Absolutely. We offer tailored workshops for individual agencies covering your specific workflows and use cases. Use the contact section below to get in touch and we'll work with you to design a session.</div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    Are sessions recorded?
+                    <span class="chevron">&#9660;</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">Most webinars are recorded and added to our On-Demand Video Library within a week. Workshops and labs are interactive and not recorded, but all materials and guides are shared with attendees afterwards.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT / CTA -->
+<section class="cta-section" id="contact">
+    <h2>Ready to Get Started?</h2>
+    <p>Whether you're exploring Copilot for the first time or rolling it out across your agency, we're here to help.</p>
+    <div class="cta-cards">
+        <div class="cta-card">
+            <h3>Request a Custom Workshop</h3>
+            <p>Tailored training for your team's specific workflows and use cases.</p>
+            <a href="mailto:rherbert@microsoft.com?subject=Custom%20Copilot%20Workshop%20Request%20-%20WA%20Gov">Contact Us &rarr;</a>
+        </div>
+        <div class="cta-card">
+            <h3>Become a Copilot Champion</h3>
+            <p>Lead adoption in your agency. Get early access to resources and direct support.</p>
+            <a href="mailto:rherbert@microsoft.com?subject=Copilot%20Champion%20Programme%20-%20WA%20Gov">Join the Programme &rarr;</a>
+        </div>
+        <div class="cta-card">
+            <h3>General Enquiries</h3>
+            <p>Questions about Copilot, licencing, or training? We'd love to hear from you.</p>
+            <a href="mailto:rherbert@microsoft.com?subject=Copilot%20Training%20Enquiry%20-%20WA%20Gov">Get in Touch &rarr;</a>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-content">
+        <p style="margin-bottom: 0.5rem;">&copy; 2026 Microsoft &bull; Copilot Training Hub for WA Government</p>
+        <p><a href="https://www.microsoft.com/en-au/privacy">Privacy</a> &nbsp;|&nbsp; <a href="https://www.microsoft.com/en-au/legal">Terms</a> &nbsp;|&nbsp; <a href="https://adoption.microsoft.com/en-us/copilot/">Microsoft Adoption Hub</a></p>
+    </div>
+</footer>
+
+<script>
+    // Mobile nav toggle
+    function toggleMenu() {
+        document.getElementById('navLinks').classList.toggle('open');
+    }
+
+    // Close menu on link click
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            document.getElementById('navLinks').classList.remove('open');
+        });
+    });
+
+    // Resource tab filter
+    function filterResources(category) {
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+
+        document.querySelectorAll('.resource-card').forEach(card => {
+            if (category === 'all' || card.dataset.category === category) {
+                card.style.display = '';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+
+    // Schedule filter
+    function filterSchedule(type) {
+        document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+
+        document.querySelectorAll('#scheduleBody tr').forEach(row => {
+            if (type === 'all' || row.dataset.type === type) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    }
+
+    // FAQ toggle
+    function toggleFaq(btn) {
+        const item = btn.parentElement;
+        const answer = item.querySelector('.faq-answer');
+        const isOpen = item.classList.contains('open');
+
+        // Close all
+        document.querySelectorAll('.faq-item').forEach(i => {
+            i.classList.remove('open');
+            i.querySelector('.faq-answer').style.maxHeight = null;
+        });
+
+        // Open clicked (if was closed)
+        if (!isOpen) {
+            item.classList.add('open');
+            answer.style.maxHeight = answer.scrollHeight + 'px';
+        }
+    }
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
